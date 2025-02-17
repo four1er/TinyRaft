@@ -1,0 +1,3 @@
+[submodule "yalantinglibs"]
+	path = yalantinglibs
+	url = https://github.com/alibaba/yalantinglibs.git
