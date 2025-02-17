@@ -1,4 +1,4 @@
-#include "rpc_example.h"
+#include "rpc_server.h"
 #include <ylt/coro_rpc/coro_rpc_server.hpp>
 
 using namespace coro_rpc;

@@ -7,4 +7,5 @@ link_libraries(Threads::Threads)
 find_package(yalantinglibs REQUIRED)
 link_libraries(yalantinglibs::yalantinglibs)
 
-add_executable(rpc_example rpc_example.cpp)
+add_executable(rpc_server rpc_server.cpp)
+add_executable(rpc_client rpc_client.cpp)
