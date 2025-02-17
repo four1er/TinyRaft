@@ -20,11 +20,31 @@ void Raft::ProcessTimeout(TimePoint now_time) {
   }
 }
 
-void Raft::FollowerTimeout(TimePoint now_time) {}
+void Raft::FollowerTimeout(TimePoint now_time) {
+  if (now_time > timer_state_.election_due) {
+    // election timeout
+    BecomeCandidate();
+    MakeElection();
+  }
+}
 
-void Raft::CandidateTimeout(TimePoint now_time) {}
+void Raft::CandidateTimeout(TimePoint now_time) {
+  if (now_time > timer_state_.election_due) {
+    // election timeout
+    MakeElection();
+  }
+}
 
-void Raft::LeaderTimeout(TimePoint now_time) {}
+void Raft::LeaderTimeout(TimePoint now_time) {
+  for (const auto &[node_id, node] : nodes_maps_) {
+    if (timer_state_.node_heartbeat_due[node_id] < now_time) {
+      timer_state_.node_heartbeat_due[node_id] =
+          now_time + KHeartbeatTimeout / 2;
+      // node->Send(CreateAppendEntriesRequest());
+      // TODO: send heartbeat / append entries
+    }
+  }
+}
 
 void Raft::MakeElection() {}
 

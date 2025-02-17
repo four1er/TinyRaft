@@ -51,7 +51,9 @@ struct VolatileState {
 };
 
 struct TimerState {
-  TimePoint ElectionDue; // election timeout
+  TimePoint election_due; // election timeout
+  std::unordered_map<uint32_t, TimePoint> node_heartbeat_due;
+  std::unordered_map<uint32_t, TimePoint> node_rpc_timeout;
 };
 
 } // namespace tinyraft

@@ -31,6 +31,11 @@ private:
   TimerState timer_state_;       // timer state
   std::unordered_map<uint64_t, std::shared_ptr<NodeBase>> nodes_maps_;
 
+  /**
+   * @brief when now_time greater than election_due, change role to candidate.
+   *
+   * @param now_time
+   */
   void FollowerTimeout(TimePoint now_time);
   void CandidateTimeout(TimePoint now_time);
   void LeaderTimeout(TimePoint now_time);
